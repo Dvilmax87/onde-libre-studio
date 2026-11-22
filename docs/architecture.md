@@ -102,4 +102,10 @@ Tranchés le 22/11/2026 :
 
 En attente :
 1. URL du flux RSS d'au moins une émission (Épic 5).
-2. Définition d'un « point de blocage » pour la vue Pilotage (PRD §3.3, non défini).
+2. Valeur de N (jours au même statut) pour la règle de blocage.
+
+Définitions Pilotage (22/11/2026) :
+- **Point de blocage** = (a) une date prévue de l'épisode est dépassée sans changement de statut, ou (b) un enregistrement est « À réenregistrer », ou (c) l'épisode est au même statut depuis plus de N jours.
+- **À venir** = épisodes dont la date de publication prévue est dans le futur.
+
+Maquettes (US-08) : https://claude.ai/artifact/JhCLMyPpPjXyVNfNZo5uHK
