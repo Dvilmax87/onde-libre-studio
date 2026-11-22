@@ -37,7 +37,12 @@ onde-libre-studio/
 │   ├── migrations/          # SQL versionné, 1 fichier par changement
 │   └── tests/               # tests de cloisonnement RLS
 ├── netlify/functions/       # fonctions serveur (RSS)
-└── src/                     # application React
+└── src/
+    ├── lib/domaine.ts       # types, libellés, droits UI (miroir du RLS)
+    ├── lib/supabase.ts      # client + messages d'erreur
+    ├── store/session.ts     # Zustand : session, profil, rôle
+    ├── components/          # Layout, EpisodeModal, Enregistrements
+    └── pages/               # Connexion, Pipeline, Invites, Emissions, Pilotage
 ```
 
 ## 5. Conventions
@@ -65,6 +70,7 @@ onde-libre-studio/
 | 22/11/2026 | Partenariats actif dès la V1 |
 | 22/11/2026 | Valeurs statuts émission / prise de son + 7 dates clés épisode fournies |
 | 22/11/2026 | Jalon 1 validé |
+| 22/11/2026 | Maquettes validées ; blocage = date dépassée / à réenregistrer / statut figé > N j (N par statut, défaut 10) ; « À venir » = publication prévue future |
 
 ## 8. Avancement
 - [x] Jalon 1 — Cadrage validé (Épic 1) — 22/11/2026

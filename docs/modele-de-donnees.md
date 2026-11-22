@@ -56,6 +56,7 @@ Toute valeur hors liste est refusée par la base (US-05).
 | date_validation_mixage | date | Livraison version finale masterisée |
 | date_publication_prevue | timestamptz | Mise en ligne programmée sur le flux RSS |
 | date_publication_effective | timestamptz | Diffusion publique réelle |
+| statut_modifie_le | timestamptz | Mis à jour automatiquement à chaque changement de statut |
 
 ### `invites` (fiche, visible par tous les rôles)
 id · prenom · nom (obligatoire) · biographie · modalites_contact · notes
@@ -77,6 +78,16 @@ id · annonceur (obligatoire) · perimetre · date_debut · date_fin (≥ date_d
 
 ### `episode_campagnes`
 PK (episode_id, campagne_id) · rattache_le
+
+### `parametres_blocage` (seuils du Pilotage)
+statut (PK, hors « Publié ») · jours (> 0, défaut 10). Lecture tous rôles, modification Direction.
+
+### Vue `v_blocages` (security_invoker : respecte le RLS de l'appelant)
+episode_id · regle (`date_depassee` | `a_reenregistrer` | `statut_fige`) · detail · depuis.
+- `date_depassee` : une des 5 dates prévues est passée et le statut n'a pas changé depuis cette échéance.
+- `a_reenregistrer` : un enregistrement de l'épisode est « À réenregistrer ».
+- `statut_fige` : `episodes.statut_modifie_le` plus ancien que le seuil du statut.
+Un épisode publié n'est jamais bloqué.
 
 ### `profils`
 id (= auth.users.id) · nom · role (null = aucun accès). Créé automatiquement à la création du compte ; rôle attribué par la Direction.
