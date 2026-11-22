@@ -63,10 +63,12 @@ onde-libre-studio/
 | 22/11/2026 | « Publié » : production, diffusion, direction |
 | 22/11/2026 | Réalisation : statut épisode jusqu'à « Monté » |
 | 22/11/2026 | Partenariats actif dès la V1 |
+| 22/11/2026 | Valeurs statuts émission / prise de son + 7 dates clés épisode fournies |
+| 22/11/2026 | Jalon 1 validé |
 
 ## 8. Avancement
-- [ ] Jalon 1 — Cadrage validé (Épic 1)
-- [ ] Épic 2 — Base de données
+- [x] Jalon 1 — Cadrage validé (Épic 1) — 22/11/2026
+- [x] Épic 2 — Base de données (projet Supabase `vldwqnjfaiimshkzeaun`)
 - [ ] Jalon 2 — Écrans connectés (Épic 3)
 - [ ] Jalon 3 — Recette sécurité (Épic 4)
 - [ ] Épic 5 — Intégration RSS

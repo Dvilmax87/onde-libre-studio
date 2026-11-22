@@ -27,12 +27,12 @@ Principe de **double verrouillage** (PRD §4.2) : l'UI masque les vues et action
 
 | Table | Champs (PRD) | Relations |
 |---|---|---|
-| `emissions` | titre, thématique, type (originale / marque), statut, `rss_url` (technique, pour l'Épic 5) | 1 émission → N épisodes |
-| `episodes` | titre, résumé, numéro, statut pipeline, dates clés de production et publication | N → 1 émission ; N ↔ N invités ; 1 → N enregistrements ; 1 → N diffusions ; N ↔ N campagnes |
+| `emissions` | titre, thématique, type (originale / marque), statut (en projet / active / en pause / archivée), `rss_url` (technique, pour l'Épic 5) | 1 émission → N épisodes |
+| `episodes` | titre, résumé, numéro, statut pipeline, 7 dates clés (pré-production, enregistrement prévue/réelle, montage prévue, validation/mixage, publication prévue/effective) | N → 1 émission ; N ↔ N invités ; 1 → N enregistrements ; 1 → N diffusions ; N ↔ N campagnes |
 | `invites` | identité, biographie, modalités de prise de contact, notes | N ↔ N épisodes via `episode_invites` |
 | `invites_coordonnees` | coordonnées de contact (**données protégées**) | 1 ↔ 1 invité |
 | `episode_invites` | liaison + date de rattachement (historique) | — |
-| `enregistrements` | date/créneau, lieu (studio / distance), statut de prise de son, notes de montage | N → 1 épisode |
+| `enregistrements` | date/créneau, lieu (studio / distance), statut de prise de son (à planifier / planifié / en cours / enregistré / à réenregistrer / annulé), notes de montage | N → 1 épisode |
 | `diffusions` | plateforme, date de publication, lien, indicateurs rapatriés, date de synchro | N → 1 épisode |
 | `campagnes_sponsors` | annonceur, périmètre, période (début/fin), données réservées | N ↔ N épisodes via `episode_campagnes` |
 | `profils` | nom, rôle applicatif | 1 ↔ 1 compte Supabase Auth |
@@ -98,8 +98,8 @@ Tranchés le 22/11/2026 :
 - Réalisation : peut faire avancer un épisode jusqu'à « Monté ».
 - Partenariats : actif dès la V1.
 
-En attente (valeurs fournies par le Product Builder) :
-1. Valeurs du statut d'une émission.
-2. Valeurs du statut de prise de son (enregistrements).
-3. Dates clés de production d'un épisode.
-4. URL du flux RSS d'au moins une émission (Épic 5).
+- Statuts émission, prise de son et dates clés : fournis le 22/11/2026 (voir `modele-de-donnees.md`).
+
+En attente :
+1. URL du flux RSS d'au moins une émission (Épic 5).
+2. Définition d'un « point de blocage » pour la vue Pilotage (PRD §3.3, non défini).
