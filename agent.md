@@ -60,6 +60,9 @@ onde-libre-studio/
 | 22/11/2026 | Rôle Réalisation distinct, sans coordonnées invités |
 | 22/11/2026 | Nouveau projet Supabase `onde-libre-studio` |
 | 22/11/2026 | Champs V1 invité/sponsor : strictement ceux du PRD |
+| 22/11/2026 | « Publié » : production, diffusion, direction |
+| 22/11/2026 | Réalisation : statut épisode jusqu'à « Monté » |
+| 22/11/2026 | Partenariats actif dès la V1 |
 
 ## 8. Avancement
 - [ ] Jalon 1 — Cadrage validé (Épic 1)

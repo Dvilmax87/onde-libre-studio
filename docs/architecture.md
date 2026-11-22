@@ -49,11 +49,11 @@ L = lire · E = créer/modifier · S = supprimer · — = aucun accès
 | Table | direction | production | realisation | diffusion | partenariats |
 |---|---|---|---|---|---|
 | emissions | L E S | L | L | L | L |
-| episodes | L E S | L E | L E [À VALIDER] | L + passage « Publié » | L |
-| invites (fiche) | L E S | L E | L | L | L [À VALIDER] |
+| episodes | L E S | L E (tout le pipeline, y c. « Publié ») | L + statut jusqu'à « Monté » | L + passage « Publié » | L |
+| invites (fiche) | L E S | L E | L | L | L |
 | invites_coordonnees | L E S | L E | — | — | — |
 | episode_invites | L E S | L E | L | L | L |
-| enregistrements | L E S | L E | L E | L | — [À VALIDER] |
+| enregistrements | L E S | L E | L E | L | — |
 | diffusions | L E S | L | L | L E | L |
 | campagnes_sponsors | L E S | — | — | — | L E |
 | episode_campagnes | L E S | — | — | — | L E |
@@ -93,10 +93,13 @@ Mise en œuvre : fonction SQL `role_courant()` lisant `profils.role` de `auth.ui
 GitHub (branche `main` protégée) → Netlify (build `vite build`, fonctions `netlify/functions`). Variables : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (serveur uniquement).
 
 ## 8. Points à valider (Jalon 1)
-1. **Passage au statut « Publié »** : la matrice PRD §2 le confie à Diffusion, mais le critère US-09 dit « un utilisateur Production peut faire évoluer l'épisode sur **tout** le pipeline ». Qui peut publier ?
-2. **Droits de Réalisation sur le statut** : peut-elle faire avancer un épisode (ex. « Enregistré », « Monté ») ?
-3. **Valeurs du statut d'une émission** : le PRD cite « statut » sans valeurs (seulement « 7 existants + 3 à venir »).
-4. **Valeurs du statut de prise de son** (enregistrements) : non précisées.
-5. **« Dates clés de production »** d'un épisode : lesquelles ? (le PRD ne les liste pas)
-6. **Rôle Partenariats en V1** : comptes actifs dès la V1, ou rôle seulement préparé ?
-7. **Flux RSS** : URL d'au moins une émission réelle (ou de test) pour l'Épic 5.
+Tranchés le 22/11/2026 :
+- Passage « Publié » : Production, Diffusion, Direction.
+- Réalisation : peut faire avancer un épisode jusqu'à « Monté ».
+- Partenariats : actif dès la V1.
+
+En attente (valeurs fournies par le Product Builder) :
+1. Valeurs du statut d'une émission.
+2. Valeurs du statut de prise de son (enregistrements).
+3. Dates clés de production d'un épisode.
+4. URL du flux RSS d'au moins une émission (Épic 5).
