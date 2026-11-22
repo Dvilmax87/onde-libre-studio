@@ -21,8 +21,8 @@ On y retrouve :
 | Profil | Peut faire | Ne voit pas |
 |---|---|---|
 | Direction | Tout | — |
-| Production éditoriale | Créer et suivre les épisodes, gérer les invités, planifier les enregistrements | Données sponsors |
-| Réalisation son/montage | Suivre les épisodes et les enregistrements | Coordonnées des invités, données sponsors |
+| Production éditoriale | Créer et suivre les épisodes jusqu'à « Publié », gérer les invités, planifier les enregistrements | Données sponsors |
+| Réalisation son/montage | Suivre les enregistrements, faire avancer un épisode jusqu'à « Monté » | Coordonnées des invités, données sponsors |
 | Diffusion & audience | Gérer les publications, passer un épisode en « Publié », consulter les diffusions | Coordonnées des invités, données sponsors |
 | Partenariats | Gérer les campagnes sponsors et leurs épisodes | Coordonnées des invités |
 
