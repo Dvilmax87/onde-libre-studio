@@ -117,7 +117,7 @@ Règle d'or : **toute évolution des droits se fait dans les deux couches, en co
 | Campagnes sponsors | Lisibles uniquement par Direction et Partenariats. |
 | Alerte advisor attendue | `role_courant()` exécutable par les connectés : voulu, elle ne renvoie que le rôle de l'appelant. |
 | En-têtes HTTP | `vercel.json` : `X-Frame-Options: DENY`, `nosniff`, `Referrer-Policy`. |
-| Mots de passe compromis | Advisor « Leaked Password Protection Disabled » : à activer dans Supabase › Authentication › Settings (selon l'offre Supabase du studio). |
+| Mots de passe | Politique renforcée le 23/11/2026 (Authentication › Email) : 12 caractères minimum, minuscules + majuscules + chiffres + symboles, changement de mot de passe sécurisé. « Prevent use of leaked passwords » nécessite l'offre Supabase Pro : l'advisor « Leaked Password Protection Disabled » reste affiché tant que le projet est en offre gratuite (risque accepté). |
 
 ## 7. Intégration RSS
 
@@ -157,5 +157,5 @@ Détail et justification : `choix-integration.md`.
 1. `npm run build` : aucune erreur.
 2. `npm test` : 13/13.
 3. `supabase/tests/cloisonnement_rls.sql` : 46/46 `ok = true`.
-4. Supabase › Advisors › Security : aucune alerte nouvelle.
+4. Supabase › Advisors › Security : aucune alerte nouvelle (2 attendues : `role_courant`, leaked passwords).
 5. Connexion avec un compte de chaque rôle : grille § 2 de `recette-securite.md`.

@@ -93,4 +93,5 @@ Supabase › SQL Editor › coller `supabase/tests/cloisonnement_rls.sql` › Ru
 ## 3. Configuration Supabase Auth
 - Inscriptions publiques désactivées (fait par le Product Builder le 23/11/2026).
 - Comptes créés dans Authentication › Users ; un nouveau compte n'a **aucun accès** tant que la Direction ne lui attribue pas un rôle (écran Équipe).
-- Advisors sécurité : seul avertissement restant `role_courant()` exécutable par les utilisateurs connectés — voulu (nécessaire aux politiques, ne renvoie que le rôle de l'appelant).
+- Politique de mot de passe renforcée le 23/11/2026 : 12 caractères min., majuscules, minuscules, chiffres et symboles, changement sécurisé. Protection contre les mots de passe compromis indisponible en offre gratuite (avertissement accepté).
+- Advisors sécurité : avertissement `role_courant()` exécutable par les utilisateurs connectés — voulu (nécessaire aux politiques, ne renvoie que le rôle de l'appelant).
