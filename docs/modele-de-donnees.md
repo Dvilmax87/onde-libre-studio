@@ -90,7 +90,7 @@ episode_id · regle (`date_depassee` | `a_reenregistrer` | `statut_fige`) · det
 Un épisode publié n'est jamais bloqué.
 
 ### `profils`
-id (= auth.users.id) · nom · role (null = aucun accès). Créé automatiquement à la création du compte ; rôle attribué par la Direction.
+id (= auth.users.id) · nom · email (copié depuis l'authentification, non modifiable) · role (null = aucun accès). Créé automatiquement à la création du compte ; rôle attribué par la Direction depuis l'écran Équipe. Trigger `controle_maj_profil` : la Direction ne peut pas retirer son propre rôle.
 
 Toutes les tables ont `cree_le` / `modifie_le` (mis à jour par trigger).
 
@@ -115,4 +115,4 @@ Toutes les tables ont `cree_le` / `modifie_le` (mis à jour par trigger).
 | Réalisation modifie un épisode publié | 0 ligne | 0 ✅ |
 | Direction lit coordonnées / campagnes / profils | tout | 1 / 1 / 3 ✅ |
 
-La suite de tests complète et rejouable est livrée à l'Épic 4 (`supabase/tests/`).
+Suite complète et rejouable (46 tests) : `supabase/tests/cloisonnement_rls.sql`, résultats dans `recette-securite.md`.

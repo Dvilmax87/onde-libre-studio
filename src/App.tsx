@@ -8,6 +8,7 @@ import Pipeline from './pages/Pipeline';
 import Invites from './pages/Invites';
 import Emissions from './pages/Emissions';
 import Pilotage from './pages/Pilotage';
+import Equipe from './pages/Equipe';
 
 export default function App() {
   const { pret, session, profil, init, deconnexion } = useSession();
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/invites" element={<Invites />} />
           <Route path="/emissions" element={<Emissions />} />
           <Route path="/pilotage" element={<Pilotage />} />
+          <Route path="/equipe" element={<Equipe />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

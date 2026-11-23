@@ -20,6 +20,7 @@ export default function Layout() {
     { to: '/invites', label: 'Invités', visible: true },
     { to: '/emissions', label: 'Émissions', visible: true },
     { to: '/pilotage', label: 'Pilotage Direction', visible: peut.voirPilotage(role) },
+    { to: '/equipe', label: 'Équipe', visible: peut.gererEquipe(role) },
   ].filter(l => l.visible);
 
   return (

@@ -71,6 +71,7 @@ export const peut = {
   voirEnregistrements: (r: Role | null) => r !== null && r !== 'partenariats',
   gererEnregistrements: (r: Role | null) => r === 'direction' || r === 'production' || r === 'realisation',
   voirPilotage: (r: Role | null) => r === 'direction',
+  gererEquipe: (r: Role | null) => r === 'direction',
   voirCampagnes: (r: Role | null) => r === 'direction' || r === 'partenariats',
 };
 

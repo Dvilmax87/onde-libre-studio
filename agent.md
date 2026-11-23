@@ -43,7 +43,7 @@ onde-libre-studio/
     ├── lib/supabase.ts      # client + messages d'erreur
     ├── store/session.ts     # Zustand : session, profil, rôle
     ├── components/          # Layout, EpisodeModal, Enregistrements
-    └── pages/               # Connexion, Pipeline, Invites, Emissions, Pilotage
+    └── pages/               # Connexion, Pipeline, Invites, Emissions, Pilotage, Equipe
 ```
 
 ## 5. Conventions
@@ -78,7 +78,7 @@ onde-libre-studio/
 ## 8. Avancement
 - [x] Jalon 1 — Cadrage validé (Épic 1) — 22/11/2026
 - [x] Épic 2 — Base de données (projet Supabase `vldwqnjfaiimshkzeaun`)
-- [ ] Jalon 2 — Écrans connectés (Épic 3)
-- [ ] Jalon 3 — Recette sécurité (Épic 4)
+- [x] Jalon 2 — Écrans connectés (Épic 3) — app en ligne 23/11/2026
+- [~] Jalon 3 — Recette sécurité (Épic 4) : 46/46 tests base OK ; recette manuelle UI à cocher (docs/recette-securite.md)
 - [ ] Épic 5 — Intégration RSS
 - [ ] Épic 6 — Production + documentation
