@@ -72,6 +72,7 @@ onde-libre-studio/
 | 22/11/2026 | Valeurs statuts émission / prise de son + 7 dates clés épisode fournies |
 | 22/11/2026 | Jalon 1 validé |
 | 23/11/2026 | Hébergement : Vercel (et non Netlify) |
+| 23/11/2026 | Déployé : https://onde-libre-studio-7rhg.vercel.app (dépôt GitHub Dvilmax87/onde-libre-studio) |
 | 22/11/2026 | Maquettes validées ; blocage = date dépassée / à réenregistrer / statut figé > N j (N par statut, défaut 10) ; « À venir » = publication prévue future |
 
 ## 8. Avancement
