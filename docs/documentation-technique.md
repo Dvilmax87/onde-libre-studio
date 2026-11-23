@@ -43,7 +43,7 @@ src/
   lib/rss.ts                 Appel de la fonction RSS côté navigateur (ne lève jamais)
   store/session.ts           Session, profil, rôle (Zustand)
   components/                Layout (menu par rôle), EpisodeModal, Enregistrements, ResultatSynchro
-  pages/                     Connexion, Pipeline, Invites, Emissions, Pilotage, Equipe
+  pages/                     Connexion, Pipeline, Invites, Emissions, Campagnes, Pilotage, Equipe
 docs/                        Toute la documentation
 ```
 

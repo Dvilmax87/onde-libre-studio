@@ -9,6 +9,7 @@ import Invites from './pages/Invites';
 import Emissions from './pages/Emissions';
 import Pilotage from './pages/Pilotage';
 import Equipe from './pages/Equipe';
+import Campagnes from './pages/Campagnes';
 
 export default function App() {
   const { pret, session, profil, init, deconnexion } = useSession();
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/emissions" element={<Emissions />} />
           <Route path="/pilotage" element={<Pilotage />} />
           <Route path="/equipe" element={<Equipe />} />
+          <Route path="/campagnes" element={<Campagnes />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

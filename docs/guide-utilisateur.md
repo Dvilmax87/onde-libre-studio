@@ -30,6 +30,8 @@ Pour toute l'équipe du studio. Adresse : **https://onde-libre-studio-7rhg.verce
 | Planifier / suivre les enregistrements | ✓ | ✓ | ✓ | lecture | — |
 | Créer / modifier une émission | ✓ | — | — | — | — |
 | Synchroniser le flux RSS | ✓ | — | — | ✓ | — |
+| Campagnes sponsors (voir, créer, modifier, rattacher) | ✓ | — | — | — | ✓ |
+| Supprimer une campagne | ✓ | — | — | — | — |
 | Pilotage du studio | ✓ | — | — | — | — |
 | Gérer l'équipe (rôles) | ✓ | — | — | — | — |
 
@@ -86,7 +88,14 @@ Un enregistrement « À réenregistrer » signale automatiquement l'épisode com
 
 L'application continue de fonctionner normalement dans tous les cas.
 
-## 7. Pilotage du studio (Direction)
+## 7. Campagnes sponsors (Direction, Partenariats)
+Données confidentielles : les autres pôles ne voient ni le menu ni les données.
+1. **+ Nouvelle campagne** : annonceur (obligatoire), périmètre, dates de début et de fin, données réservées.
+2. **Épisodes rattachés** : cochez les épisodes concernés (filtre par émission ou titre). Le statut de chaque épisode est affiché.
+3. La fiche de la campagne liste ses épisodes avec leur statut et leur date de publication.
+4. Seule la Direction peut supprimer une campagne.
+
+## 8. Pilotage du studio (Direction)
 - **Compteurs** :
   - En cours : épisodes non publiés ;
   - À venir : épisodes dont la publication est prévue dans le futur ;
@@ -98,7 +107,7 @@ L'application continue de fonctionner normalement dans tous les cas.
   3. il est resté **au même statut trop longtemps**. Le seuil est de 10 jours par défaut et se règle statut par statut dans « Règles et seuils de blocage ».
 - **Par émission** et **Prochaines publications** : vue d'ensemble du calendrier.
 
-## 8. Gérer l'équipe (Direction)
+## 9. Gérer l'équipe (Direction)
 1. Créez le compte du collaborateur dans Supabase : Authentication › Users › **Add user** (email et mot de passe provisoire).
 2. Dans l'application, écran **Équipe** : le compte apparaît avec « Aucun (accès bloqué) ».
 3. Choisissez son **rôle**. L'effet est immédiat à sa prochaine connexion ou au rechargement de la page.

@@ -19,6 +19,7 @@ export default function Layout() {
     { to: '/', label: 'Pipeline des épisodes', visible: true },
     { to: '/invites', label: 'Invités', visible: true },
     { to: '/emissions', label: 'Émissions', visible: true },
+    { to: '/campagnes', label: 'Campagnes sponsors', visible: peut.voirCampagnes(role) },
     { to: '/pilotage', label: 'Pilotage Direction', visible: peut.voirPilotage(role) },
     { to: '/equipe', label: 'Équipe', visible: peut.gererEquipe(role) },
   ].filter(l => l.visible);

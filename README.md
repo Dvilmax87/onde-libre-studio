@@ -49,3 +49,4 @@ Stack : React + Vite + TypeScript · Supabase (Postgres, Auth, RLS) · Vercel (+
 | 19 | Déploiement Vercel |
 | 20 | `docs/documentation-technique.md` |
 | 21 | `docs/guide-utilisateur.md` |
+| + | Écran Campagnes sponsors (pôle Partenariats, hors backlog, ajouté le 23/11/2026) |

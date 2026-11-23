@@ -74,21 +74,26 @@ Supabase › SQL Editor › coller `supabase/tests/cloisonnement_rls.sql` › Ru
 
 ## 2. Recette manuelle de l'interface (premier verrou)
 
-À cocher avec les comptes réels sur l'application en ligne.
+Méthode : une **fenêtre de navigation privée par compte**. Pour chaque ligne, remplacer ☐ par ✅ (conforme) ou ❌ (écart, décrire dans « Remarque »).
 
-| Rôle | Compte | Vérification | OK |
-|---|---|---|---|
-| Tous | — | Sans connexion : seule la page de connexion est accessible | ☐ |
-| Tous | — | Mauvais mot de passe : message d'erreur, pas d'accès | ☐ |
-| Direction | maxime.darracq@orange.fr | Menus : Pipeline, Invités, Émissions, Pilotage, Équipe | ☐ |
-| Direction | | Équipe : changer le rôle d'un compte ; son propre rôle est verrouillé | ☐ |
-| Production | maximedarracq@gmail.com | Pas de menu Pilotage ni Équipe ; bouton « Nouvel épisode » visible ; coordonnées invités visibles | ☐ |
-| Réalisation | maxime@lamarque-energies.fr | Pas de « Nouvel épisode » ; coordonnées masquées ; statut limité à « Monté » ; sessions d'enregistrement modifiables | ☐ |
-| Diffusion | maxime@savelite.fr | Seule action sur un épisode « Monté » : « Passer à Publié » ; coordonnées masquées | ☐ |
-| Partenariats | darracq@savelite.fr | Aucune action sur les épisodes ; coordonnées masquées ; pas d'enregistrements dans le détail | ☐ |
-| Tous | | URL `/pilotage` ou `/equipe` tapée à la main hors Direction → retour au Pipeline | ☐ |
+| # | Compte | Vérification | Résultat | Remarque |
+|---|---|---|---|---|
+| 1 | (aucun) | Sans connexion : seule la page de connexion s'affiche | ☐ | |
+| 2 | (aucun) | Mauvais mot de passe : message « Identifiants incorrects », pas d'accès | ☐ | |
+| 3 | Direction · maxime.darracq@orange.fr | Menus : Pipeline, Invités, Émissions, Campagnes sponsors, Pilotage, Équipe | ☐ | |
+| 4 | Direction | Équipe : la liste des 5 comptes s'affiche ; mon propre rôle est grisé | ☐ | |
+| 5 | Direction | Campagnes : créer une campagne et lui rattacher un épisode | ☐ | |
+| 6 | Production · maximedarracq@gmail.com | Menus : Pipeline, Invités, Émissions seulement (ni Campagnes, ni Pilotage, ni Équipe) | ☐ | |
+| 7 | Production | Bouton « + Nouvel épisode » visible ; coordonnées (email, téléphone) visibles sur une fiche invité | ☐ | |
+| 8 | Réalisation · maxime@lamarque-energies.fr | Pas de « + Nouvel épisode » ; fiche invité : « Données protégées » | ☐ | |
+| 9 | Réalisation | Statut d'un épisode : « Publié » n'est jamais proposé ; sessions d'enregistrement modifiables | ☐ | |
+| 10 | Diffusion · maxime@savelite.fr | Sur un épisode « Monté » : seul « Passer à Publié » ; fiche invité : « Données protégées » | ☐ | |
+| 11 | Diffusion | Émissions : bouton « Synchroniser le flux » visible, « Modifier » absent | ☐ | |
+| 12 | Partenariats · darracq@savelite.fr | Menus : Pipeline, Invités, Émissions, Campagnes sponsors ; voit la campagne créée au test 5 | ☐ | |
+| 13 | Partenariats | Aucun bouton d'action sur les épisodes ; pas de section Enregistrements dans le détail | ☐ | |
+| 14 | Production, Réalisation, Diffusion | Taper `/campagnes`, `/pilotage` puis `/equipe` à la fin de l'URL : retour au Pipeline | ☐ | |
 
----
+Validé par : ______________________ · Date : ____ / ____ / ________
 
 ## 3. Configuration Supabase Auth
 - Inscriptions publiques désactivées (fait par le Product Builder le 23/11/2026).
