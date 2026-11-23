@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useSession } from './store/session';
+import { configOk } from './lib/supabase';
 import Layout from './components/Layout';
 import Connexion from './pages/Connexion';
 import Pipeline from './pages/Pipeline';
@@ -12,6 +13,21 @@ export default function App() {
   const { pret, session, profil, init, deconnexion } = useSession();
   useEffect(() => { init(); }, [init]);
 
+  if (!configOk) {
+    return (
+      <div className="page-connexion">
+        <div className="boite-connexion">
+          <h1 style={{ fontSize: 20 }}>Configuration manquante</h1>
+          <p style={{ margin: 0, fontSize: 14 }}>
+            Les variables <code>VITE_SUPABASE_URL</code> et <code>VITE_SUPABASE_ANON_KEY</code> n’étaient pas définies au moment du build.
+          </p>
+          <p className="muet" style={{ margin: 0 }}>
+            Ajoutez-les dans l’hébergeur (Vercel › Settings › Environment Variables), puis relancez un déploiement.
+          </p>
+        </div>
+      </div>
+    );
+  }
   if (!pret) return <p className="muet" style={{ padding: 32 }}>Chargement…</p>;
   if (!session) return <Connexion />;
   if (!profil?.role) {

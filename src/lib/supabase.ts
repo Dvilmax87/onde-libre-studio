@@ -3,11 +3,11 @@ import { createClient } from '@supabase/supabase-js';
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-if (!url || !key) {
-  throw new Error('Configuration manquante : VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY (voir .env.example)');
-}
+/** false si les variables d'environnement n'étaient pas présentes au moment du build. */
+export const configOk = Boolean(url && key);
 
-export const supabase = createClient(url, key);
+// Ne jamais planter au chargement : l'écran affiche un message explicite si la configuration manque.
+export const supabase = createClient(url || 'https://config-manquante.invalid', key || 'config-manquante');
 
 /** Message lisible à partir d'une erreur Supabase/Postgres. */
 export function messageErreur(e: unknown): string {
