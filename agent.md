@@ -36,7 +36,8 @@ onde-libre-studio/
 ├── supabase/
 │   ├── migrations/          # SQL versionné, 1 fichier par changement
 │   └── tests/               # tests de cloisonnement RLS
-├── api/                     # Vercel Functions (RSS)
+├── api/rss-sync.ts          # Vercel Function : synchro flux RSS
+├── tests/                   # tests automatisés (npm test)
 ├── vercel.json              # config Vercel (SPA + en-têtes sécurité)
 └── src/
     ├── lib/domaine.ts       # types, libellés, droits UI (miroir du RLS)
@@ -72,6 +73,7 @@ onde-libre-studio/
 | 22/11/2026 | Valeurs statuts émission / prise de son + 7 dates clés épisode fournies |
 | 22/11/2026 | Jalon 1 validé |
 | 23/11/2026 | Hébergement : Vercel (et non Netlify) |
+| 23/11/2026 | RSS : rapprochement épisode ↔ flux par titre normalisé ; fonction sans clé secrète (jeton utilisateur + RLS) |
 | 23/11/2026 | Déployé : https://onde-libre-studio-7rhg.vercel.app (dépôt GitHub Dvilmax87/onde-libre-studio) |
 | 22/11/2026 | Maquettes validées ; blocage = date dépassée / à réenregistrer / statut figé > N j (N par statut, défaut 10) ; « À venir » = publication prévue future |
 
@@ -80,5 +82,5 @@ onde-libre-studio/
 - [x] Épic 2 — Base de données (projet Supabase `vldwqnjfaiimshkzeaun`)
 - [x] Jalon 2 — Écrans connectés (Épic 3) — app en ligne 23/11/2026
 - [~] Jalon 3 — Recette sécurité (Épic 4) : 46/46 tests base OK ; recette manuelle UI à cocher (docs/recette-securite.md)
-- [ ] Épic 5 — Intégration RSS
+- [x] Épic 5 — Intégration RSS (api/rss-sync.ts, 13 tests `npm test`)
 - [ ] Épic 6 — Production + documentation

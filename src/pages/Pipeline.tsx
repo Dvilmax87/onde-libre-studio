@@ -4,7 +4,7 @@ import { useRole } from '../store/session';
 import {
   DATES_EPISODE, LIB_STATUT_EPISODE, STATUTS_EPISODE, fmtDate, peut, statutSuivant, statutsAutorises,
 } from '../lib/domaine';
-import type { Blocage, Emission, Enregistrement, Episode, Invite, StatutEpisode } from '../lib/domaine';
+import type { Blocage, Diffusion, Emission, Enregistrement, Episode, Invite, StatutEpisode } from '../lib/domaine';
 import EpisodeModal from '../components/EpisodeModal';
 import Enregistrements from '../components/Enregistrements';
 
@@ -18,6 +18,7 @@ export default function Pipeline() {
   const [liaisons, setLiaisons] = useState<Liaison[]>([]);
   const [enregs, setEnregs] = useState<Enregistrement[]>([]);
   const [blocages, setBlocages] = useState<Blocage[]>([]);
+  const [diffusions, setDiffusions] = useState<Diffusion[]>([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState<string | null>(null);
   const [fEmission, setFEmission] = useState('tous');
@@ -27,15 +28,16 @@ export default function Pipeline() {
 
   const charger = useCallback(async () => {
     setErreur(null);
-    const [em, ep, inv, li, en, bl] = await Promise.all([
+    const [em, ep, inv, li, en, bl, di] = await Promise.all([
       supabase.from('emissions').select('*').order('titre'),
       supabase.from('episodes').select('*').order('date_publication_prevue', { ascending: true, nullsFirst: false }),
       supabase.from('invites').select('*').order('nom'),
       supabase.from('episode_invites').select('episode_id, invite_id'),
       peut.voirEnregistrements(role) ? supabase.from('enregistrements').select('*').order('date_creneau') : Promise.resolve({ data: [], error: null }),
       supabase.from('v_blocages').select('*'),
+      supabase.from('diffusions').select('*').order('date_publication', { ascending: false }),
     ]);
-    const e = [em, ep, inv, li, en, bl].find(r => r.error)?.error;
+    const e = [em, ep, inv, li, en, bl, di].find(r => r.error)?.error;
     if (e) setErreur(messageErreur(e));
     setEmissions((em.data as Emission[]) ?? []);
     setEpisodes((ep.data as Episode[]) ?? []);
@@ -43,6 +45,7 @@ export default function Pipeline() {
     setLiaisons((li.data as Liaison[]) ?? []);
     setEnregs((en.data as Enregistrement[]) ?? []);
     setBlocages((bl.data as Blocage[]) ?? []);
+    setDiffusions((di.data as Diffusion[]) ?? []);
     setChargement(false);
   }, [role]);
 
@@ -167,6 +170,20 @@ export default function Pipeline() {
                   <div className="ligne-date" key={d.cle}>
                     <span className="muet">{d.libelle}</span>
                     <strong style={{ fontWeight: 500 }}>{fmtDate(sel[d.cle] as string | null, d.type === 'datetime-local')}</strong>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 12, borderTop: '1px solid var(--bordure)' }}>
+                <h3>Diffusions</h3>
+                {diffusions.filter(d => d.episode_id === sel.id).length === 0 && (
+                  <p className="muet" style={{ margin: 0 }}>Aucune donnée de diffusion pour cet épisode.</p>
+                )}
+                {diffusions.filter(d => d.episode_id === sel.id).map(d => (
+                  <div key={d.id} style={{ display: 'flex', flexDirection: 'column', gap: 2, padding: 10, border: '1px solid var(--bordure)', borderRadius: 8, fontSize: 13 }}>
+                    <strong>{d.plateforme}</strong>
+                    <span className="muet">Publié le {fmtDate(d.date_publication, true)}{d.indicateurs?.duree ? ` · durée ${d.indicateurs.duree}` : ''}</span>
+                    {d.lien && <a href={d.lien} target="_blank" rel="noopener noreferrer">Écouter / voir la publication</a>}
+                    {d.synchronise_le && <span className="muet" style={{ fontSize: 12 }}>Données RSS synchronisées le {fmtDate(d.synchronise_le, true)}</span>}
                   </div>
                 ))}
               </div>

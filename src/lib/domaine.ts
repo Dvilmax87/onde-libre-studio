@@ -48,6 +48,11 @@ export interface Enregistrement {
   id: string; episode_id: string; date_creneau: string | null; lieu: Lieu | null;
   statut_prise_son: StatutPriseSon; notes_montage: string | null;
 }
+export interface Diffusion {
+  id: string; episode_id: string; plateforme: string; date_publication: string | null; lien: string | null;
+  indicateurs: { duree?: string | null; guid?: string | null; audio?: string | null } | null;
+  source: 'manuel' | 'rss'; synchronise_le: string | null;
+}
 export interface Blocage { episode_id: string; regle: string; detail: string; depuis: string; }
 
 export const DATES_EPISODE: { cle: keyof Episode; libelle: string; type: 'date' | 'datetime-local' }[] = [
@@ -72,6 +77,7 @@ export const peut = {
   gererEnregistrements: (r: Role | null) => r === 'direction' || r === 'production' || r === 'realisation',
   voirPilotage: (r: Role | null) => r === 'direction',
   gererEquipe: (r: Role | null) => r === 'direction',
+  synchroniserRss: (r: Role | null) => r === 'direction' || r === 'diffusion',
   voirCampagnes: (r: Role | null) => r === 'direction' || r === 'partenariats',
 };
 

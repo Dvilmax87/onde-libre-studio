@@ -4,6 +4,9 @@ import { supabase, messageErreur } from '../lib/supabase';
 import { useRole } from '../store/session';
 import { LIB_STATUT_EMISSION, LIB_TYPE_EMISSION, peut } from '../lib/domaine';
 import type { Emission, StatutEmission, TypeEmission } from '../lib/domaine';
+import { synchroniserEmission } from '../lib/rss';
+import type { ResultatSync } from '../lib/rss';
+import ResultatSynchro from '../components/ResultatSynchro';
 
 export default function Emissions() {
   const role = useRole();
@@ -11,6 +14,15 @@ export default function Emissions() {
   const [liste, setListe] = useState<Emission[]>([]);
   const [edition, setEdition] = useState<Emission | 'nouveau' | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [synchro, setSynchro] = useState<{ id: string; titre: string; r: ResultatSync } | null>(null);
+  const [enCours, setEnCours] = useState<string | null>(null);
+  const peutSync = peut.synchroniserRss(role);
+
+  async function synchroniser(e: Emission) {
+    setEnCours(e.id); setSynchro(null);
+    const r = await synchroniserEmission(e.id);
+    setEnCours(null); setSynchro({ id: e.id, titre: e.titre, r });
+  }
 
   const charger = useCallback(async () => {
     const r = await supabase.from('emissions').select('*').order('titre');
@@ -26,9 +38,15 @@ export default function Emissions() {
         {gere && <button className="btn btn-primaire" onClick={() => setEdition('nouveau')}>+ Nouvelle émission</button>}
       </header>
       {erreur && <div className="alerte" role="alert">{erreur}</div>}
+      {synchro && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <span className="muet">Flux RSS de « {synchro.titre} »</span>
+          <ResultatSynchro r={synchro.r} onFermer={() => setSynchro(null)} />
+        </div>
+      )}
       <div className="table-boite" style={{ background: '#fff' }}>
         <table style={{ minWidth: 640 }}>
-          <thead><tr><th scope="col">Titre</th><th scope="col">Thématique</th><th scope="col">Type</th><th scope="col">Statut</th><th scope="col">Flux RSS</th>{gere && <th scope="col"><span className="sr">Actions</span></th>}</tr></thead>
+          <thead><tr><th scope="col">Titre</th><th scope="col">Thématique</th><th scope="col">Type</th><th scope="col">Statut</th><th scope="col">Flux RSS</th>{(gere || peutSync) && <th scope="col"><span className="sr">Actions</span></th>}</tr></thead>
           <tbody>
             {liste.map(e => (
               <tr key={e.id}>
@@ -37,7 +55,16 @@ export default function Emissions() {
                 <td>{LIB_TYPE_EMISSION[e.type]}</td>
                 <td>{LIB_STATUT_EMISSION[e.statut]}</td>
                 <td className="muet">{e.rss_url ? 'Renseigné' : '—'}</td>
-                {gere && <td><button className="btn-lien" onClick={() => setEdition(e)}>Modifier</button></td>}
+                {(gere || peutSync) && (
+                  <td style={{ whiteSpace: 'nowrap' }}>
+                    {peutSync && e.rss_url && (
+                      <button className="btn btn-doux" style={{ marginRight: 12 }} disabled={enCours === e.id} onClick={() => synchroniser(e)}>
+                        {enCours === e.id ? 'Synchronisation…' : 'Synchroniser le flux'}
+                      </button>
+                    )}
+                    {gere && <button className="btn-lien" onClick={() => setEdition(e)}>Modifier</button>}
+                  </td>
+                )}
               </tr>
             ))}
             {liste.length === 0 && <tr><td colSpan={6} className="muet">Aucune émission.</td></tr>}
