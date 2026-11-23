@@ -83,4 +83,4 @@ onde-libre-studio/
 - [x] Jalon 2 — Écrans connectés (Épic 3) — app en ligne 23/11/2026
 - [~] Jalon 3 — Recette sécurité (Épic 4) : 46/46 tests base OK ; recette manuelle UI à cocher (docs/recette-securite.md)
 - [x] Épic 5 — Intégration RSS (api/rss-sync.ts, 13 tests `npm test`)
-- [ ] Épic 6 — Production + documentation
+- [x] Épic 6 — GitHub, Vercel, documentation technique + guide utilisateur (23/11/2026)
