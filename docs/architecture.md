@@ -14,11 +14,11 @@ Source : PRD « Onde Libre Studio — Cadrage Produit », §1 à §7. Les élém
    │                                          ├─ Postgres (6 entités + liaisons)
    │                                          └─ RLS par rôle (2e verrou)
    │
-   └─ fetch /.netlify/functions/rss-sync ──► Netlify Function
+   └─ fetch /api/rss-sync ──────────────────► Vercel Function
                                               ├─ lit le flux RSS de l'émission
                                               ├─ valide et normalise
                                               └─ écrit dans `diffusions` (clé service, côté serveur)
- Hébergement : Netlify (déploiement depuis GitHub)
+ Hébergement : Vercel (déploiement depuis GitHub)
 ```
 
 Principe de **double verrouillage** (PRD §4.2) : l'UI masque les vues et actions interdites ; la base refuse de toute façon toute lecture ou écriture hors périmètre (RLS).
@@ -76,7 +76,7 @@ Mise en œuvre : fonction SQL `role_courant()` lisant `profils.role` de `auth.ui
 
 ## 5. Intégration externe (PRD §4.1, décision : flux RSS Apple Podcasts)
 
-- Netlify Function `rss-sync` : reçoit un `emission_id`, lit `emissions.rss_url`, télécharge le flux (délai max 8 s), parse les `<item>`, rapproche chaque item d'un épisode, met à jour `diffusions` (plateforme « Apple Podcasts », date, lien).
+- Vercel Function `api/rss-sync` : reçoit un `emission_id`, lit `emissions.rss_url`, télécharge le flux (délai max 8 s), parse les `<item>`, rapproche chaque item d'un épisode, met à jour `diffusions` (plateforme « Apple Podcasts », date, lien).
 - **Ce que le RSS fournit** : données de diffusion (titre, date de publication, lien, durée). **Il ne fournit pas de chiffres d'audience.** Le PRD accepte « diffusion **ou** audience » ; l'audience resterait une évolution (Ausha/Spotify).
 - Gestion des 3 cas d'erreur (US-17), jamais bloquante, message visible à l'utilisateur :
   1. Indisponible / délai dépassé → « Service de diffusion injoignable, dernières données connues affichées (synchro du JJ/MM) ».
@@ -86,11 +86,11 @@ Mise en œuvre : fonction SQL `role_courant()` lisant `profils.role` de `auth.ui
 ## 6. Sécurité
 - Supabase Auth email + mot de passe, un compte par collaborateur ; aucune inscription publique (comptes créés par la Direction).
 - RLS activé sur 100 % des tables, aucune politique « publique ».
-- Clé `service_role` uniquement dans les variables d'environnement Netlify (fonction serveur), jamais dans le front.
+- Clé `service_role` uniquement dans les variables d'environnement Vercel (fonction serveur), jamais dans le front.
 - Tests de cloisonnement SQL (`supabase/tests/`) : un compte Diffusion ne peut ni lire ni modifier coordonnées invités, campagnes sponsors, profils d'autrui (US-14 PRD).
 
 ## 7. Déploiement
-GitHub (branche `main` protégée) → Netlify (build `vite build`, fonctions `netlify/functions`). Variables : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (serveur uniquement).
+GitHub (branche `main` protégée) → Vercel (build `vite build`, sortie `dist`, fonctions `api/`). Variables : `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (serveur uniquement).
 
 ## 8. Points à valider (Jalon 1)
 Tranchés le 22/11/2026 :

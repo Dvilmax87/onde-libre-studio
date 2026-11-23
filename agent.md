@@ -16,10 +16,10 @@
 |---|---|
 | Front | React + Vite + TypeScript, état global Zustand |
 | Base, Auth, sécurité | Supabase (Postgres + Auth + RLS), projet `onde-libre-studio`, région eu-west-3 |
-| Fonctions serveur | Netlify Functions (lecture du flux RSS, côté serveur pour éviter CORS) |
+| Fonctions serveur | Vercel Functions, dossier `api/` (lecture du flux RSS, côté serveur pour éviter CORS) |
 | Intégration externe | Flux RSS Apple Podcasts (décision du 22/11/2026) |
 | Maquettes | Claude Design |
-| Versionnage / hébergement | GitHub + Netlify |
+| Versionnage / hébergement | GitHub + Vercel |
 
 ## 4. Arborescence
 ```
@@ -36,7 +36,8 @@ onde-libre-studio/
 ├── supabase/
 │   ├── migrations/          # SQL versionné, 1 fichier par changement
 │   └── tests/               # tests de cloisonnement RLS
-├── netlify/functions/       # fonctions serveur (RSS)
+├── api/                     # Vercel Functions (RSS)
+├── vercel.json              # config Vercel (SPA + en-têtes sécurité)
 └── src/
     ├── lib/domaine.ts       # types, libellés, droits UI (miroir du RLS)
     ├── lib/supabase.ts      # client + messages d'erreur
@@ -70,6 +71,7 @@ onde-libre-studio/
 | 22/11/2026 | Partenariats actif dès la V1 |
 | 22/11/2026 | Valeurs statuts émission / prise de son + 7 dates clés épisode fournies |
 | 22/11/2026 | Jalon 1 validé |
+| 23/11/2026 | Hébergement : Vercel (et non Netlify) |
 | 22/11/2026 | Maquettes validées ; blocage = date dépassée / à réenregistrer / statut figé > N j (N par statut, défaut 10) ; « À venir » = publication prévue future |
 
 ## 8. Avancement
