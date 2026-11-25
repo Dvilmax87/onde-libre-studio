@@ -195,7 +195,7 @@ function InviteModal({ invite, coord, peutSupprimer, onFermer, onEnregistre }: {
         <div className="champ"><label htmlFor="no">Notes</label><textarea id="no" value={f.notes} onChange={e => maj('notes', e.target.value)} /></div>
         {erreur && <div className="alerte" role="alert">{erreur}</div>}
         <div className="actions">
-          {invite && peutSupprimer && <button type="button" className="btn" style={{ marginRight: 'auto', color: '#9A3A0A' }} onClick={supprimer}>Supprimer</button>}
+          {invite && peutSupprimer && <button type="button" className="btn" style={{ marginRight: 'auto', color: 'var(--danger)' }} onClick={supprimer}>Supprimer</button>}
           <button type="button" className="btn" onClick={onFermer}>Annuler</button>
           <button type="submit" className="btn btn-primaire">Enregistrer</button>
         </div>

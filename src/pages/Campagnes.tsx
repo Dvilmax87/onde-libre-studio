@@ -217,7 +217,7 @@ function CampagneModal({ campagne, lies, episodes, libEp, peutSupprimer, onFerme
         </fieldset>
         {erreur && <div className="alerte" role="alert">{erreur}</div>}
         <div className="actions">
-          {campagne && peutSupprimer && <button type="button" className="btn" style={{ marginRight: 'auto', color: '#9A3A0A' }} onClick={supprimer}>Supprimer</button>}
+          {campagne && peutSupprimer && <button type="button" className="btn" style={{ marginRight: 'auto', color: 'var(--danger)' }} onClick={supprimer}>Supprimer</button>}
           <button type="button" className="btn" onClick={onFermer}>Annuler</button>
           <button type="submit" className="btn btn-primaire" disabled={envoi}>{envoi ? 'Enregistrement…' : 'Enregistrer'}</button>
         </div>

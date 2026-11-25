@@ -10,6 +10,19 @@ import Enregistrements from '../components/Enregistrements';
 
 interface Liaison { episode_id: string; invite_id: string; }
 
+// Forme d'onde décorative, stable pour un même épisode
+function Onde({ graine }: { graine: string }) {
+  const g = [...graine].reduce((a, c) => a + c.charCodeAt(0), 0);
+  return (
+    <div className="onde" aria-hidden="true">
+      {Array.from({ length: 40 }, (_, i) => {
+        const v = Math.abs(Math.sin(i * 0.55 + g) * Math.cos(i * 0.21 + g * 2)) * 0.85 + 0.15;
+        return <span key={i} style={{ height: Math.round(v * 26), opacity: 0.45 + v * 0.55 }} />;
+      })}
+    </div>
+  );
+}
+
 export default function Pipeline() {
   const role = useRole();
   const [emissions, setEmissions] = useState<Emission[]>([]);
@@ -85,7 +98,7 @@ export default function Pipeline() {
       <div className="barre-filtres">
         <label htmlFor="f-em" style={{ fontSize: 13, fontWeight: 600 }}>Émission</label>
         <select id="f-em" value={fEmission} onChange={e => setFEmission(e.target.value)}
-          style={{ minHeight: 44, borderRadius: 8, border: '1px solid var(--bordure-forte)', padding: '0 12px' }}>
+>
           <option value="tous">Toutes les émissions</option>
           {emissions.map(e => <option key={e.id} value={e.id}>{e.titre}</option>)}
         </select>
@@ -107,15 +120,19 @@ export default function Pipeline() {
 
       <div className="disposition">
         <div className="principal kanban-boite">
-          <div className="kanban" style={{ gridTemplateColumns: `repeat(${colonnes.length}, minmax(210px, 1fr))`, minWidth: colonnes.length * 222 }}>
+          <div className="kanban">
             {colonnes.map(s => {
               const cartes = filtres.filter(e => e.statut === s);
               return (
                 <section key={s} className="colonne" aria-label={LIB_STATUT_EPISODE[s]}>
                   <div className="colonne-tete">
-                    <span className={`chip chip-${s}`}>{LIB_STATUT_EPISODE[s]}</span>
-                    <span className="muet" style={{ fontWeight: 600 }}>{cartes.length}</span>
+                    <div className={`vumetre ${s === 'publie' ? 'fini' : ''}`} aria-hidden="true">
+                      {STATUTS_EPISODE.map((x, i) => <span key={x} className={i <= STATUTS_EPISODE.indexOf(s) ? 'on' : ''} />)}
+                    </div>
+                    <strong>{LIB_STATUT_EPISODE[s]}</strong>
+                    <span className="muet" style={{ fontFamily: 'var(--mono)', fontSize: 12 }}>{cartes.length} épisode{cartes.length > 1 ? 's' : ''}</span>
                   </div>
+                  <div className="piste">
                   {cartes.map(ep => {
                     const nxt = statutSuivant(role, ep.statut);
                     const bl = blocagesDe(ep.id);
@@ -123,10 +140,11 @@ export default function Pipeline() {
                     return (
                       <article key={ep.id} className={`carte-ep ${ep.id === selId ? 'selection' : ''}`}>
                         <button className="carte-ep-corps" onClick={() => setSelId(ep.id)}>
-                          <span className="muet" style={{ fontSize: 12, fontWeight: 600 }}>
+                          <span className="carte-ep-meta">
                             {nomEmission[ep.emission_id]}{ep.numero ? ` · n° ${ep.numero}` : ''}
                           </span>
-                          <span style={{ fontSize: 14, fontWeight: 600, lineHeight: 1.35 }}>{ep.titre}</span>
+                          <span style={{ fontSize: 15, fontWeight: 600, lineHeight: 1.3 }}>{ep.titre}</span>
+                          <Onde graine={ep.id} />
                           <span className="muet" style={{ fontSize: 12 }}>{nbInv === 0 ? 'Aucun invité' : `${nbInv} invité${nbInv > 1 ? 's' : ''}`}</span>
                           <span className="muet" style={{ fontSize: 12 }}>Publication prévue : {fmtDate(ep.date_publication_prevue)}</span>
                         </button>
@@ -135,6 +153,7 @@ export default function Pipeline() {
                       </article>
                     );
                   })}
+                  </div>
                 </section>
               );
             })}

@@ -131,7 +131,7 @@ export default function EpisodeModal({ episode, invitesLies, emissions, invites,
         </fieldset>
         {erreur && <div className="alerte" role="alert">{erreur}</div>}
         <div className="actions">
-          {episode && peutSupprimer && <button type="button" className="btn" onClick={supprimer} style={{ marginRight: 'auto', color: '#9A3A0A' }}>Supprimer</button>}
+          {episode && peutSupprimer && <button type="button" className="btn" onClick={supprimer} style={{ marginRight: 'auto', color: 'var(--danger)' }}>Supprimer</button>}
           <button type="button" className="btn" onClick={onFermer}>Annuler</button>
           <button type="submit" className="btn btn-primaire" disabled={envoi}>{envoi ? 'Enregistrement…' : 'Enregistrer'}</button>
         </div>

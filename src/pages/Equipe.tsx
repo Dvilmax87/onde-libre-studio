@@ -44,7 +44,7 @@ export default function Equipe() {
       </div>
       {erreur && <div className="alerte" role="alert">{erreur}</div>}
       {info && <div className="info" role="status">{info}</div>}
-      <div className="table-boite" style={{ background: '#fff' }}>
+      <div className="table-boite" >
         <table style={{ minWidth: 640 }}>
           <thead><tr><th scope="col">Email</th><th scope="col">Nom affiché</th><th scope="col">Rôle</th></tr></thead>
           <tbody>

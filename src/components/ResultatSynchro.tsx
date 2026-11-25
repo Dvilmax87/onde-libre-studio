@@ -3,8 +3,8 @@ import { TITRE_CODE, TONALITE } from '../lib/rss';
 import { fmtDate } from '../lib/domaine';
 
 const STYLES = {
-  succes: { background: '#E8F3EC', color: '#1D5431', border: '1px solid #B9DCC5' },
-  attention: { background: '#FFF6E0', color: '#6B4A00', border: '1px solid #F0D99A' },
+  succes: { background: '#0F2A20', color: 'var(--succes)', border: '1px solid #24513F' },
+  attention: { background: 'var(--accent-pale)', color: 'var(--accent-fonce)', border: '1px solid #5C4523' },
   erreur: { background: 'var(--alerte-fond)', color: 'var(--alerte-texte)', border: '1px solid var(--alerte-bord)' },
 };
 

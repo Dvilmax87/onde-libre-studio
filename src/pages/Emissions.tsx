@@ -44,7 +44,7 @@ export default function Emissions() {
           <ResultatSynchro r={synchro.r} onFermer={() => setSynchro(null)} />
         </div>
       )}
-      <div className="table-boite" style={{ background: '#fff' }}>
+      <div className="table-boite" >
         <table style={{ minWidth: 640 }}>
           <thead><tr><th scope="col">Titre</th><th scope="col">Thématique</th><th scope="col">Type</th><th scope="col">Statut</th><th scope="col">Flux RSS</th>{(gere || peutSync) && <th scope="col"><span className="sr">Actions</span></th>}</tr></thead>
           <tbody>
